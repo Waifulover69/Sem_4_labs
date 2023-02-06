@@ -2,27 +2,22 @@
 #include<stdlib.h>
 #include<math.h>
 
-void getPrimeFactors(int n, int a[50]){
-    int i,j,isPrime,lmt=0;
-    for(i=2;i<n;i++){
-        if(n%i==0){
-            isPrime = 1;
-            for(j=2;j<=i/2;j++){
-                if(i%j==0){
-                    isPrime = 0;
-                    break;
+int opcount = 0;
 
-
-                }
-            }
-            if(isPrime==1){
-               a[lmt++] = i;
-               printf("%d\n",i);
-            }
-        }
-
-    }
-}
+void getPrimeFactors(int n, int a[50])  
+{  
+    int count,lmt = 0;
+    
+    for(count = 2; n > 1; count++)  
+    {  
+        while(n % count == 0)  
+        {  
+            a[lmt++] = count;
+            n = n / count;  
+        }  
+    }  
+    printf("\n");  
+}  
 
 
  int main(){
@@ -34,16 +29,22 @@ void getPrimeFactors(int n, int a[50]){
     getPrimeFactors(m,a);
     getPrimeFactors(n,b);
     while(a[x1]!=0 && b[x2]!=0){
+        opcount++;
         if(a[x1]==b[x2]){
             gcd = gcd * a[x1];
             x1++;
             x2++;
         }
-        else if(a[x1] < b[x2])
+        else if(a[x1] < b[x2]){
             x1++;
-        else
             x2++;
+        }
+        else{
+            x2++;
+            x1++;
+        }
     }
-    printf("GCD of the given numbers is: %d", gcd);
+    printf("GCD of the given numbers is: %d\n", gcd);
+    printf("The operation count is: %d",opcount);
 
 } 
