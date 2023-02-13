@@ -3,33 +3,30 @@
 #include<string.h>
 #include<math.h>
 
-void String_match(char a[15],char c[15]){
-    int n = strlen(a);
-    int m = strlen(c);
+void String_search(char *pat,char* text){
+    int m = strlen(pat);
+    int n = strlen(text);
 
-    for(int i=0;i<m-n;i++){
-        for(int j=0;j<n;j++){
-            if(a[j]!=c[i+j]){
+    for(int i=0;i<n;i++){
+        int j;
+        for(j=0;j<m;j++)
+            if(text[i+j]!=pat[j])
                 break;
-            }
-            if(j==n){
-                printf("Pattern found");
+        if(j==m)
+            printf("Pattern found at index %d",i);
 
-            }
-        }
+
+        
     }
-    
-
-
 }
 
 
 int main(){
-    char a[15],c[15];
+    char pat[15],wor[15];
     printf("Enter the pattern");
-    gets(a);
+    gets(pat);
     printf("Enter the text");
-    gets(c);
-    String_match(a,c);
+    gets(wor);
+    String_search(pat,wor);
     return 0;
 }
